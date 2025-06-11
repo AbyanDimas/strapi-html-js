@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "kegiatans",
+  "info": {
+    "singularName": "kegiatan",
+    "pluralName": "kegiatans",
+    "displayName": "Kegiatan"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nama_Kegiatan": {
+      "type": "richtext"
+    }
+  }
+}

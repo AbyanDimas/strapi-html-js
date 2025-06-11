@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "profil_masjids",
+  "info": {
+    "singularName": "profil-masjid",
+    "pluralName": "profil-masjids",
+    "displayName": "profil_masjid"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Profil": {
+      "type": "text"
+    }
+  }
+}

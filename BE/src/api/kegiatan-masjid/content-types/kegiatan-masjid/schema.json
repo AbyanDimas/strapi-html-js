@@ -1,0 +1,14 @@
+{
+  "kind": "singleType",
+  "collectionName": "kegiatan_masjids",
+  "info": {
+    "singularName": "kegiatan-masjid",
+    "pluralName": "kegiatan-masjids",
+    "displayName": "Kegiatan_Masjid"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {}
+}

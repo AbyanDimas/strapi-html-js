@@ -13,6 +13,19 @@
   "attributes": {
     "Profil": {
       "type": "text"
+    },
+    "Judul": {
+      "type": "string"
+    },
+    "gambar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

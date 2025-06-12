@@ -8,6 +8,8 @@
 </head>
 <body>
 
+  <!-- LOGIN SECTION -->
+
   <!-- WEBSITE SECTION -->
   <div id="websiteContent">
 
@@ -15,84 +17,34 @@
       <h1>Masjid Khairul Ba'i</h1>
       <nav>
         <ul>
-          <li><a href="#" onclick="showContent('beranda')">Beranda</a></li>
-          <li><a href="#" onclick="showContent('profil')">Profil</a></li>
-          <li><a href="#" onclick="showContent('jadwal')">Jadwal</a></li>
-          <li><a href="#" onclick="showContent('kegiatan')">Kegiatan</a></li>
+          <li><a href="profil.html" id="profil">Profil</a></li>
+          <li><a href="jadwal.html" id="jadwal">Jadwal</a></li>
+          <li><a href="kegiatan.html" id="kegiatan">Kegiatan</a></li>
         </ul>
       </nav>
     </header>
 
 <section class="hero">
-  <img src="" alt="">
+  <img id="heroImage" src="" alt="Background Masjid" />
   <div class="overlay-text">
-    <h2></h2>
-    <p></p>
+    <h2 id="heroTitle"></h2>
+    <p id="heroDescription"></p>
   </div>
 </section>
 
-    <main>
-      <section id="beranda" class="content-section active">
-        <h2>Halo Beranda</h2>
-        <p>Selamat datang di halaman beranda Masjid Khairul Ba'i.</p>
-      </section>
+  <script>
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
 
-      <section id="profil" class="content-section">
-        <h2>Halo Profil</h2>
-        <p>Ini adalah informasi tentang profil masjid.</p>
-      </section>
-
-      <section id="jadwal" class="content-section">
-        <h2>Halo Jadwal</h2>
-        <p>Berikut ini adalah jadwal kegiatan dan sholat.</p>
-      </section>
-
-      <section id="kegiatan" class="content-section">
-        <h2>Halo Kegiatan</h2>
-        <p>Berbagai kegiatan aktif dilakukan di masjid ini.</p>
-      </section>
-  
-<section>
-  <h3>Profil Masjid</h3>
-  <p id="profilMasjid" align="justify"></p>
-</section>
-
-
-      <section>
-        <h3>Jadwal Sholat Hari Ini</h3>
-        <table>
-          <tr>
-            <th>Sholat</th>
-            <th>Waktu</th>
-          </tr>
-          <tr><td>Subuh</td><td>04:35</td></tr>
-          <tr><td>Dzuhur</td><td>12:05</td></tr>
-          <tr><td>Ashar</td><td>15:20</td></tr>
-          <tr><td>Maghrib</td><td>18:05</td></tr>
-          <tr><td>Isya</td><td>19:15</td></tr>
-        </table>
-      </section>
-
-      <section>
-        <h3>Kegiatan Masjid</h3>
-<ul class="kegiatan">
-  <!-- item akan dimasukkan dengan JavaScript -->
-</ul>
-      </section>
-
-<section>
-  <h3>Dokumentasi Kegiatan</h3>
-  <div class="cards">
-    <!-- Cards will be dynamically inserted here by JavaScript -->
-  </div>
-</section>
-    </main>
-
-    <footer>
-      <p>&copy; 2025 Masjid Khairul Ba'i. SMK Negeri 1 Adiwerna.</p>
-    </footer>
-  </div>
-
-  <script src="script.js"></script>
+      if (user && pass) {
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('websiteContent').classList.remove('hidden');
+      } else {
+        alert('Silakan isi nama pengguna dan kata sandi.');
+      }
+    }
+  </script>
+<script src="script.js"></script>
 </body>
 </html>

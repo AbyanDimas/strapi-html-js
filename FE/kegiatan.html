@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kegiatan Masjid Khoirul Ba'i</title>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" 
+    rel="stylesheet" 
+  />
+  <style>
+    /* Reset and base */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #d8e1c0, #cfdef3);
+      color: #1f2937;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: #4ca1af;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+      color: #4ca1af;
+      outline: none;
+    }
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px;
+      flex-grow: 1;
+    }
+    /* Header */
+    header {
+      background: #4ca1af;
+      color: white;
+      padding: 28px 0;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 2px;
+      box-shadow: 0 3px 8px rgba(76, 161, 175, 0.4);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      background: rgba(255 255 255 / 0.25);
+    }
+
+
+    /* Activities Section */
+    .activities {
+      margin-top: 32px;
+      display: grid;
+  grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .activity-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    .activity-card:hover, .activity-card:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(37 99 235 / 0.2);
+    }
+    .activity-image img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .activity-content {
+      padding: 16px 20px 24px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .activity-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #4ca1af;
+    }
+    .activity-desc {
+      flex-grow: 1;
+      color: #4b5563;
+      font-size: 1rem;
+    }
+    /* Footer */
+    footer {
+      background: #4ca1af;
+      color: white;
+      padding: 24px 16px;
+      margin-top: auto;
+    }
+    .footer-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .footer-section {
+      min-width: 220px;
+    }
+    .footer-section h3 {
+      font-weight: 700;
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+    }
+    .footer-section p, .footer-section a {
+      font-size: 0.95rem;
+      color: #d1d5db;
+      line-height: 1.4;
+    }
+    .footer-section a:hover, .footer-section a:focus {
+      color: #93c5fd;
+    }
+    /* Responsive */
+    @media (max-width: 400px) {
+      nav {
+        gap: 12px;
+      }
+      .header-container {
+        padding: 0 8px;
+      }
+      .container {
+        padding: 16px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Masjid Khairul Ba'i</h1>
+    <nav>
+      <ul>
+        <li><a href="profil.html" id="profil">Profil</a></li>
+        <li><a href="jadwal.html" id="jadwal">Jadwal</a></li>
+        <li><a href="kegiatan.html" id="kegiatan">Kegiatan</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" role="main">
+<section class="activities" aria-label="Kegiatan Masjid Khoirul Ba'i" id="kegiatanContainer">
+  <!-- Kegiatan akan dimuat otomatis lewat API -->
+</section>
+
+  </main>
+
+  <footer role="contentinfo" aria-label="Informasi kontak dan sosial media Masjid Khoirul Ba'i">
+    <div class="footer-container">
+      <section class="footer-section">
+        <h3>SMK Negeri 1 Adiwerna</h3>
+        <h3>Kontak Kami</h3>
+        <p>Jl. Raya II, Pekuncen, Pesarean, Kec. Adiwerna, Kabupaten Tegal, Jawa Tengah 5219</p>
+        <p>Telepon: (021) 1234-5678</p>
+        <p>Email: info@masjidkhoirul.id</p>
+      </section>
+      <section class="footer-section">
+        <h3>Sosial Media</h3>
+        <p><a href="https://facebook.com/masjidkhoirulba'i" target="_blank" rel="noopener noreferrer">Facebook</a></p>
+        <p><a href="https://instagram.com/masjidkhoirulba'i" target="_blank" rel="noopener noreferrer">Instagram</a></p>
+        <p><a href="https://twitter.com/masjidkhoirulba'i" target="_blank" rel="noopener noreferrer">Twitter</a></p>
+      </section>
+    </div>
+  </footer>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const kegiatanContainer = document.getElementById("kegiatanContainer");
+
+    fetch("http://localhost:1337/api/kegiatans?populate=*")
+      .then((res) => res.json())
+      .then((result) => {
+        const data = result.data;
+        const baseUrl = "http://localhost:1337";
+
+        const cards = data.map((item) => {
+          const title = item.Judul_Kegiatan || item.Nama_Kegiatan || "Kegiatan";
+          const description = item.Nama_Kegiatan || "Deskripsi kegiatan belum tersedia.";
+          const imgUrl = item.gambar
+            ? baseUrl + (item.gambar.formats.medium?.url || item.gambar.url)
+            : "default.jpg"; // fallback jika tidak ada gambar
+
+          return `
+            <article class="activity-card" tabindex="0">
+              <div class="activity-image">
+                <img src="${imgUrl}" alt="${title}" />
+              </div>
+              <div class="activity-content">
+                <h3 class="activity-title">${title}</h3>
+                <p align="justify" class="activity-desc">${description}</p>
+              </div>
+            </article>
+          `;
+        });
+
+        kegiatanContainer.innerHTML = cards.join("");
+      })
+      .catch((err) => {
+        kegiatanContainer.innerHTML = "<p>Gagal memuat kegiatan. Silakan coba lagi nanti.</p>";
+        console.error("Gagal fetch kegiatan:", err);
+      });
+  });
+</script>
+
+</html>
+
+

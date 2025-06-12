@@ -1,117 +1,61 @@
-// Function to show content based on navigation
-function showContent(sectionId) {
-  // Hide all sections
-  const sections = document.querySelectorAll('.content-section');
-  sections.forEach((section) => {
-    section.classList.remove('active');
-  });
+function navigate(page) {
+  const main = document.getElementById("mainContent");
 
-// Hapus semua kelas 'active' dari menu navigasi
-  const selectedSection = document.getElementById(sectionId);
-  if (selectedSection) {
-    selectedSection.classList.add('active');
+  let content = "";
+
+  if (page === "beranda") {
+    content = `
+      <h2>Beranda</h2>
+      <p>Selamat datang di website Masjid Khairul Ba'i. Ini adalah tempat informasi kegiatan dan layanan masjid kami.</p>
+    `;
+  } else if (page === "profil") {
+    content = `
+      <h2>Profil Masjid</h2>
+      <p>Masjid Khairul Ba'i berdiri sejak tahun 2010 dan menjadi pusat pembinaan keagamaan di lingkungan SMK Negeri 1 Adiwerna.</p>
+    `;
+  } else if (page === "jadwal") {
+    content = `
+      <h2>Jadwal Sholat</h2>
+      <table>
+        <tr><th>Sholat</th><th>Waktu</th></tr>
+        <tr><td>Subuh</td><td>04:35</td></tr>
+        <tr><td>Dzuhur</td><td>12:05</td></tr>
+        <tr><td>Ashar</td><td>15:20</td></tr>
+        <tr><td>Maghrib</td><td>18:05</td></tr>
+        <tr><td>Isya</td><td>19:15</td></tr>
+      </table>
+    `;
+  } else if (page === "kegiatan") {
+    content = `
+      <h2>Kegiatan Masjid</h2>
+      <ul>
+        <li>Pengajian Rutin</li>
+        <li>BTQ (Baca Tulis Al-Qur'an)</li>
+        <li>Rohis, Tilawah, dan Hadroh</li>
+      </ul>
+    `;
   }
+
+  main.innerHTML = content;
 }
 
-// Fungsi untuk mengambil data banner
-async function fetchBannerData() {
-  try {
-    const response = await fetch('http://localhost:1337/api/banner?populate=*');
-    const data = await response.json();
-    
-    if (data.data) {
-      const banner = data.data;
-      const heroSection = document.querySelector('.hero');
-      
-      // Set background image
-      const img = heroSection.querySelector('img');
-      img.src = `http://localhost:1337${banner.Background.url}`;
-      img.alt = banner.Judul;
-      
-      // Set overlay text
-      const overlayText = heroSection.querySelector('.overlay-text');
-      overlayText.querySelector('h2').textContent = banner.Judul;
-      overlayText.querySelector('p').textContent = banner.Deskripsi;
-    }
-  } catch (error) {
-    console.error('Error fetching banner data:', error);
-    const heroSection = document.querySelector('.hero');
-    heroSection.querySelector('img').src = 'default-mosque.jpg';
-    heroSection.querySelector('.overlay-text h2').textContent = 'Masjid Khairul Ba\'i';
-    heroSection.querySelector('.overlay-text p').textContent = 'Tempat ibadah, ilmu, dan kebersamaan umat';
-  }
-}
 
-// Fungsi untuk menampilkan konten berdasarkan navigasi
-document.addEventListener('DOMContentLoaded', () => {
-  fetchBannerData();
-  fetchDokumentasiKegiatan();
-  fetchDaftarKegiatan();
-  fetchProfilMasjid();
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("http://localhost:1337/api/banner?populate=*")
+    .then(response => response.json())
+    .then(result => {
+      const data = result.data;
 
+      // Pilih gambar kualitas terbaik (original)
+      const baseUrl = "http://localhost:1337";
+      const imageUrl = baseUrl + data.Background.url;
+
+      // Masukkan ke elemen HTML
+      document.getElementById("heroImage").src = imageUrl;
+      document.getElementById("heroTitle").textContent = data.Judul;
+      document.getElementById("heroDescription").textContent = data.Deskripsi;
+    })
+    .catch(error => {
+      console.error("Gagal mengambil data banner:", error);
+    });
 });
-
-// Ambil dokumentasi kegiatan
-async function fetchDokumentasiKegiatan() {
-  try {
-    const response = await fetch('http://localhost:1337/api/dokumentasi-kegiatans?populate=*');
-    const result = await response.json();
-    const kegiatanData = result.data;
-
-    const cardsContainer = document.querySelector('.cards');
-    cardsContainer.innerHTML = ''; // Kosongkan dulu
-
-    kegiatanData.forEach(item => {
-      const namaKegiatan = item.Nama_Kegiatan || 'Kegiatan';
-
-      const gambarObj = item.Gambar;
-      const gambarUrl = gambarObj?.formats?.medium?.url || gambarObj?.url || '/default.jpg';
-
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.innerHTML = `
-        <img src="http://localhost:1337${gambarUrl}" alt="${namaKegiatan}" />
-        <h4>${namaKegiatan}</h4>
-      `;
-
-      cardsContainer.appendChild(card);
-    });
-  } catch (error) {
-    console.error('Gagal mengambil dokumentasi kegiatan:', error);
-  }
-}
-
-// Ambil data kegiatan
-async function fetchDaftarKegiatan() {
-  try {
-    const response = await fetch('http://localhost:1337/api/kegiatans?populate=*');
-    const result = await response.json();
-    const data = result.data;
-
-    const list = document.querySelector('.kegiatan');
-    list.innerHTML = ''; // kosongkan daftar
-
-    data.forEach(item => {
-      const nama = item.Nama_Kegiatan || 'Kegiatan';
-      const li = document.createElement('li');
-      li.textContent = nama;
-      list.appendChild(li);
-    });
-  } catch (error) {
-    console.error('Gagal mengambil daftar kegiatan:', error);
-  }
-}
-
-// Ambil profil masjid
-async function fetchProfilMasjid() {
-  try {
-    const response = await fetch('http://localhost:1337/api/profil-masjid?populate=*');
-    const result = await response.json();
-    const profil = result.data?.Profil || 'Profil belum tersedia.';
-
-    const profilElement = document.getElementById('profilMasjid');
-    profilElement.textContent = profil;
-  } catch (error) {
-    console.error('Gagal mengambil profil masjid:', error);
-  }
-}

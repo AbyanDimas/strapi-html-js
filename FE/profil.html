@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profil Khoirul Ba'i</title>
+<link rel="stylesheet" href="style.css" />
+
+<style>
+  /* Profil Masjid Styles */
+  .profil-container {
+    max-width: 960px;
+    margin: 48px auto;
+    padding: 32px 24px;
+    font-family: 'Poppins', sans-serif;
+    color: #1f2937;
+    line-height: 1.6;
+   background: linear-gradient(135deg, #e2f1b9, #cfdef3);
+    border-radius: 24px;
+    box-shadow: 0 16px 48px rgba(30, 64, 175, 0.15);
+  }
+  .profil-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .profil-image img {
+    width: 100%;
+    border-radius: 24px;
+    object-fit: cover;
+    max-height: 360px;
+    box-shadow: 0 0 30px rgba(30, 64, 175, 0.3);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  .profil-image img:hover,
+  .profil-image img:focus {
+    transform: scale(1.05);
+    outline: none;
+  }
+  .profil-content h2 {
+    font-size: 2rem;
+    margin-bottom: 24px;
+    font-weight: 700;
+    color: #4ca1af;
+    letter-spacing: 0.5px;
+  }
+  .profil-content section {
+    margin-bottom: 32px;
+  }
+  .profil-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    font-weight: 600;
+    color: #4ca1af;
+  }
+  .profil-content p {
+    color: #374151;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  .profil-content ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .profil-content ul li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    color: #4b5563;
+  }
+  .profil-content ul li::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #4ca1af;
+    font-weight: 700;
+  }
+  /* Toggle button */
+  .toggle-btn {
+    background-color: #4ca1af;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 24px;
+    transition: background-color 0.3s ease;
+  }
+  .toggle-btn:hover,
+  .toggle-btn:focus {
+    background-color: #4ca1af;
+    outline: none;
+  }
+  /* Responsive */
+  @media (max-width: 900px) {
+    .profil-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .profil-image img {
+      max-height: 300px;
+    }
+  }  
+
+</style>
+</head>
+<body>
+  <header>
+    <h1>Masjid Khairul Ba'i</h1>
+    <nav>
+      <ul>
+        <li><a href="profil.html" id="profil">Profil</a></li>
+        <li><a href="jadwal.html" id="jadwal">Jadwal</a></li>
+        <li><a href="kegiatan.html" id="kegiatan">Kegiatan</a></li>
+      </ul>
+    </nav>
+  </header>
+<section id="profil-masjid" aria-label="Profil Masjid" class="profil-container">
+  <div class="profil-inner">
+    <div class="profil-image" tabindex="0" aria-label="Foto eksterior Masjid Al-Furqan">
+<img
+  id="gambar-masjid"
+  src="gambar1.jpg"
+  alt="Foto eksterior Masjid Khoerul Ba'i"
+/>
+
+    </div>
+    <div class="profil-content">
+<h2 id="judul-masjid">Profil Masjid Khoerul Ba'i</h2>
+
+<section>
+  <h3>Sejarah Singkat</h3>
+  <p align="justify" id="sejarah-masjid"></p>
+</section>
+
+<section>
+  <h3>Visi & Misi</h3>
+  <p><strong>Visi:</strong> <span id="visi-masjid"></span></p>
+  <p><strong>Misi:</strong></p>
+  <ul id="misi-masjid"></ul>
+</section>
+
+    </div>
+  </div>
+
+  <button id="toggleMission" aria-expanded="false" aria-controls="missionList" class="toggle-btn">
+    Tampilkan/Menyembunyikan Misi
+  </button>
+</section>
+
+</body>
+
+<script>
+  // Toggle mission list visibility
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.getElementById('toggleMission');
+    const missionList = document.querySelector('.profil-content ul');
+
+    toggleBtn.addEventListener('click', function () {
+      if (missionList.style.display === 'none' || missionList.style.display === '') {
+        missionList.style.display = 'block';
+        toggleBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        missionList.style.display = 'none';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+  fetch("http://localhost:1337/api/profil-masjid?populate=*")
+    .then((res) => res.json())
+    .then((result) => {
+      const data = result.data;
+      const baseUrl = "http://localhost:1337";
+      const imageUrl = baseUrl + data.gambar.url;
+      const profilText = data.Profil;
+
+      // Pisahkan bagian sejarah vs visi-misi
+      const [sejarah, bagianVisiMisi] = profilText.split("Visi & Misi");
+      const visi = bagianVisiMisi.match(/Visi:\s*(.*?)(?=Misi:)/s)?.[1]?.trim() || "-";
+      const misiRaw = bagianVisiMisi.match(/Misi:\s*(.*)/s)?.[1]?.trim() || "";
+
+      // Konversi misi jadi list
+      const misiList = misiRaw
+        .split(/\n+/)
+        .filter((item) => item.trim())
+        .map((item) => `<li>${item.trim()}</li>`)
+        .join("");
+
+      // Masukkan ke DOM
+      document.getElementById("judul-masjid").textContent = data.Judul;
+      document.getElementById("sejarah-masjid").textContent = sejarah.trim();
+      document.getElementById("visi-masjid").textContent = visi;
+      document.getElementById("misi-masjid").innerHTML = misiList;
+      document.getElementById("gambar-masjid").src = imageUrl;
+    })
+    .catch((err) => {
+      console.error("Gagal mengambil data profil masjid:", err);
+    });
+});
+</script>
+
